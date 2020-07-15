@@ -1,17 +1,13 @@
-class EmailParser
-  attr_accessor :emails
+class EmailAddressParser
 
-  def initialize(emails)
-    self.emails = emails
-  end
+  attr_accessor :list
+
+  def initialize(unformatted_emails)
+    @list = unformatted_emails
+  end #new
 
   def parse
-    unique_emails = []
-    @emails.split(/(,|\s)+/).each do |email| 
-      if email != " " && !(unique_emails.include?(email))
-        unique_emails << email
-      end
-    end
-    unique_emails
-  end
-end 
+    @list = @list.split(/, | /).uniq
+  end #parse
+
+end
