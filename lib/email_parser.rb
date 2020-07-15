@@ -2,11 +2,16 @@ class EmailParser
   attr_accessor :emails
 
   def initialize(emails)
-    @emails = emails
+    self.emails = emails
   end
 
   def parse
-    emails.split(/(,+\s|\s)/).select {|s|s.length > 3}.uniq
+    unique_emails = []
+    @emails.split(/(,|\s)+/).each do |email| 
+      if email != " " && !(unique_emails.include?(email))
+        unique_emails << email
+      end
+    end
+    unique_emails
   end
-
-end
+end 
